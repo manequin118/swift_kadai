@@ -15,6 +15,7 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var searchField: UITextField!
+    @IBOutlet weak var backgroud: UIImageView!
     
     
     //MARK: Properties
@@ -40,13 +41,27 @@ extension WeatherViewController: UITextFieldDelegate {
             print(searchField.text!)
             
             searchWeather()
+            
         }
     
         func searchWeather(){
             if let cityName = searchField.text{
                 weatherManager.fetchWeather(cityName)
             }
+            
+            chageBackgroundImage(searchField.text!)
+            
+            print("action:search, city:"+searchField.text!)
         }
+    
+    func chageBackgroundImage(_ city: String){
+        
+        if city == "Tokyo" {
+            backgroud.image = UIImage(named: "AppIcon")
+        }else {
+            backgroud.image = UIImage(named: "background")
+        }
+    }
         
         // when keyboard return clicked
         func textFieldShouldReturn(_ textField: UITextField) -> Bool {
