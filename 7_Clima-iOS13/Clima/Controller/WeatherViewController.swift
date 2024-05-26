@@ -16,10 +16,11 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var backgroud: UIImageView!
-    
+    @IBOutlet weak var gyagLabel: UILabel!
     
     //MARK: Properties
     var weatherManager = WeatherDataManager()
+    var gyagManager = GyagDataManager()
     let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
@@ -27,6 +28,7 @@ class WeatherViewController: UIViewController {
         
         locationManager.delegate = self
         weatherManager.delegate = self
+        gyagManager.delegate = self
         searchField.delegate = self
     }
 
@@ -43,6 +45,16 @@ extension WeatherViewController: UITextFieldDelegate {
             searchWeather()
             
         }
+        
+        @IBAction func gyagBtnClicked(_ sender: UIButton) {
+            
+            fetchGyag()
+            
+        }
+    
+        func fetchGyag() {
+            
+        }
     
         func searchWeather(){
             if let cityName = searchField.text{
@@ -54,14 +66,14 @@ extension WeatherViewController: UITextFieldDelegate {
             print("action:search, city:"+searchField.text!)
         }
     
-    func chageBackgroundImage(_ city: String){
-        
-        if city == "Tokyo" {
-            backgroud.image = UIImage(named: "AppIcon")
-        }else {
-            backgroud.image = UIImage(named: "background")
+        func chageBackgroundImage(_ city: String){
+            
+            if city == "Tokyo" {
+                backgroud.image = UIImage(named: "AppIcon")
+            }else {
+                backgroud.image = UIImage(named: "background")
+            }
         }
-    }
         
         // when keyboard return clicked
         func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -97,6 +109,12 @@ extension WeatherViewController: WeatherManagerDelegate {
             temperatureLabel.text = weatherModel.temperatureString
             cityLabel.text = weatherModel.cityName
             self.conditionImageView.image = UIImage(systemName: weatherModel.conditionName)
+        }
+    }
+    
+    func updateGyag(gyagModel: GyagModel){
+        DispatchQueue.main.sync {
+            gyagLabel.text = gyagModel.joke
         }
     }
     
