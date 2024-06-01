@@ -12,7 +12,7 @@ import Foundation
 struct GyagData: Codable{
     // Value name must follow JSON property name
     let joke: String
-    let id: Int
+    let id: String
     let status: Int
 }
 

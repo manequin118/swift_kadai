@@ -10,7 +10,7 @@ import Foundation
 struct GyagModel {
     
     let joke: String
-    let id: Int
+    let id: String
     let status: Int
     
 }

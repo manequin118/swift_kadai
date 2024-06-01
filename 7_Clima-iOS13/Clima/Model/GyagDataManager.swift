@@ -17,19 +17,13 @@ struct GyagDataManager{
     
     var delegate: GyagManagerDelegate?
     
-    //MARK:- fetchWeather
-    func fetchGyag(_ city: String){
+    
+    func getGyag(){
         let completeURL = "\(baseURL)"
         print(completeURL)
         performRequest(url: completeURL )
     }
     
-//    func fetchWeather(_ latitude: Double, _ longitude: Double){
-//
-//        let completeURL = "\(baseURL)&lat=\(latitude)&lon=\(longitude)"
-//        print(completeURL)
-//        performRequest(url: completeURL )
-//    }
     
     //MARK: URL methods
     func performRequest(url: String){
@@ -39,8 +33,11 @@ struct GyagDataManager{
             // 2. Create URL Session
             let session = URLSession(configuration: .default)
             
+            var request = URLRequest(url: url)
+            request.setValue("application/json", forHTTPHeaderField: "Accept")  //jsonでヘッダーに付与
+            
             // 3. Give the session with tasks
-            let task = session.dataTask(with: url) { (data, response, error) in
+            let task = session.dataTask(with: request) { (data, response, error) in
                 // if error exists
                 if error != nil{
                     self.delegate?.failedWithError(error: error!)

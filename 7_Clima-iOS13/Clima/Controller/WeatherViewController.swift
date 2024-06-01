@@ -31,12 +31,23 @@ class WeatherViewController: UIViewController {
         gyagManager.delegate = self
         searchField.delegate = self
     }
+    
+    @IBAction func gyagBtnClicked(_ sender: UIButton) {
+        
+        fetchGyag()
+        
+    }
+
+    func fetchGyag() {
+       
+            gyagManager.getGyag()
+    }
 
 
 }
  
 //MARK:- TextField extension
-extension WeatherViewController: UITextFieldDelegate {
+extension WeatherViewController: UITextFieldDelegate{
     
         @IBAction func searchBtnClicked(_ sender: UIButton) {
             searchField.endEditing(true)    //dismiss keyboard
@@ -45,22 +56,11 @@ extension WeatherViewController: UITextFieldDelegate {
             searchWeather()
             
         }
-        
-        @IBAction func gyagBtnClicked(_ sender: UIButton) {
-            
-            fetchGyag()
-            
-        }
-    
-        func fetchGyag() {
-            
-        }
     
         func searchWeather(){
             if let cityName = searchField.text{
                 weatherManager.fetchWeather(cityName)
             }
-            
             chageBackgroundImage(searchField.text!)
             
             print("action:search, city:"+searchField.text!)
@@ -102,7 +102,7 @@ extension WeatherViewController: UITextFieldDelegate {
 }
 
 //MARK:- View update extension
-extension WeatherViewController: WeatherManagerDelegate {
+extension WeatherViewController: WeatherManagerDelegate, GyagManagerDelegate{
     
     func updateWeather(weatherModel: WeatherModel){
         DispatchQueue.main.sync {
@@ -117,6 +117,7 @@ extension WeatherViewController: WeatherManagerDelegate {
             gyagLabel.text = gyagModel.joke
         }
     }
+    
     
     func failedWithError(error: Error){
         print(error)
