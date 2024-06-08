@@ -16,10 +16,11 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var backgroud: UIImageView!
-    
+    @IBOutlet weak var gyagLabel: UILabel!
     
     //MARK: Properties
     var weatherManager = WeatherDataManager()
+    var gyagManager = GyagDataManager()
     let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
@@ -27,14 +28,26 @@ class WeatherViewController: UIViewController {
         
         locationManager.delegate = self
         weatherManager.delegate = self
+        gyagManager.delegate = self
         searchField.delegate = self
+    }
+    
+    @IBAction func gyagBtnClicked(_ sender: UIButton) {
+        
+        fetchGyag()
+        
+    }
+
+    func fetchGyag() {
+       
+            gyagManager.getGyag()
     }
 
 
 }
  
 //MARK:- TextField extension
-extension WeatherViewController: UITextFieldDelegate {
+extension WeatherViewController: UITextFieldDelegate{
     
         @IBAction func searchBtnClicked(_ sender: UIButton) {
             searchField.endEditing(true)    //dismiss keyboard
@@ -48,20 +61,19 @@ extension WeatherViewController: UITextFieldDelegate {
             if let cityName = searchField.text{
                 weatherManager.fetchWeather(cityName)
             }
-            
             chageBackgroundImage(searchField.text!)
             
             print("action:search, city:"+searchField.text!)
         }
     
-    func chageBackgroundImage(_ city: String){
-        
-        if city == "Tokyo" {
-            backgroud.image = UIImage(named: "AppIcon")
-        }else {
-            backgroud.image = UIImage(named: "background")
+        func chageBackgroundImage(_ city: String){
+            
+            if city == "Tokyo" {
+                backgroud.image = UIImage(named: "AppIcon")
+            }else {
+                backgroud.image = UIImage(named: "background")
+            }
         }
-    }
         
         // when keyboard return clicked
         func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -90,7 +102,7 @@ extension WeatherViewController: UITextFieldDelegate {
 }
 
 //MARK:- View update extension
-extension WeatherViewController: WeatherManagerDelegate {
+extension WeatherViewController: WeatherManagerDelegate, GyagManagerDelegate{
     
     func updateWeather(weatherModel: WeatherModel){
         DispatchQueue.main.sync {
@@ -99,6 +111,13 @@ extension WeatherViewController: WeatherManagerDelegate {
             self.conditionImageView.image = UIImage(systemName: weatherModel.conditionName)
         }
     }
+    
+    func updateGyag(gyagModel: GyagModel){
+        DispatchQueue.main.sync {
+            gyagLabel.text = gyagModel.joke
+        }
+    }
+    
     
     func failedWithError(error: Error){
         print(error)
