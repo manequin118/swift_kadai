@@ -32,6 +32,11 @@ class WeatherViewController: UIViewController {
         searchField.delegate = self
     }
     
+    @IBAction func cityListButton(_ sender: Any) {
+           let cityVC = CityListViewController()
+           self.navigationController?.pushViewController(cityVC, animated: true)
+    }
+    
     @IBAction func gyagBtnClicked(_ sender: UIButton) {
         
         fetchGyag()
