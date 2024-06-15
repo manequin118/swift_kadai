@@ -12,8 +12,10 @@ class CityListViewController: UIViewController {
 
     @IBOutlet weak var cityTableView: UITableView!
     
+    var weatherManager = WeatherDataManager()
+    
     private let headerArray: [String] = ["山手線", "東横線", "田園都市線", "常磐線"]
-        private let yamanoteArray: [String] = ["渋谷", "新宿", "池袋"]
+        private let yamanoteArray: [String] = ["Tokyo", "London", "池袋"]
         private let toyokoArray: [String] = ["自由ヶ丘", "日吉"]
         private let dentoArray: [String] = ["溝の口", "二子玉川"]
         private let jobanArray: [String] = ["上野"]
@@ -28,7 +30,8 @@ class CityListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        weatherManager.delegate = self
         cityTableView.dataSource = self
         cityTableView.delegate = self
         
@@ -60,7 +63,7 @@ class CityListViewController: UIViewController {
 
 }
 
-extension CityListViewController: UITableViewDelegate, UITableViewDataSource {
+extension CityListViewController: UITableViewDelegate, UITableViewDataSource, WeatherManagerDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
            let headerView = UITableViewHeaderFooterView()
@@ -89,7 +92,34 @@ extension CityListViewController: UITableViewDelegate, UITableViewDataSource {
            cityTableView.reloadSections([section], with: .automatic)
            cityTableView.endUpdates()
     }
+    
+    func tableView(_ tableView: UITableView,didSelectRowAt indexPath: IndexPath){
         
+        guard let cell = tableView.cellForRow(at: indexPath) else {
+                    // セルが存在しない場合（ヘッダーがタップされた場合）、処理をストップ
+                    return
+        }
+        
+        let cityName = items[indexPath.section].stationArray[indexPath.row]
+        weatherManager.fetchWeather(cityName)
+        // DetailViewControllerに遷移する（サンプル）
+//           let detailVC = DetailViewController()
+//           detailVC.railName = railName
+//           navigationController?.pushViewController(detailVC, animated: true)
+    }
+    
+    func updateWeather(weatherModel: WeatherModel){
+        DispatchQueue.main.sync {
+//            temperatureLabel.text = weatherModel.temperatureString
+//            cityLabel.text = weatherModel.cityName
+//            self.conditionImageView.image = UIImage(systemName: weatherModel.conditionName)
+            return
+        }
+    }
+    
+    func failedWithError(error: Error){
+        print(error)
+    }
     
     
 }
