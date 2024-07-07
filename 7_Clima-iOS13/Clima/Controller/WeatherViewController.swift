@@ -39,15 +39,9 @@ class WeatherViewController: UIViewController {
     
     @IBAction func gyagBtnClicked(_ sender: UIButton) {
         
-        fetchGyag()
+        gyagManager.getGyag()
         
     }
-
-    func fetchGyag() {
-       
-            gyagManager.getGyag()
-    }
-
 
 }
  
