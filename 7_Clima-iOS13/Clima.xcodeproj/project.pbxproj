@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		70087C522C15A0BD0059DCC2 /* railModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70087C512C15A0BD0059DCC2 /* railModel.swift */; };
+		70087C562C1DCDCA0059DCC2 /* APIsevicei.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70087C552C1DCDCA0059DCC2 /* APIsevicei.swift */; };
 		708CD3D12C02C47800E0C215 /* GyagData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708CD3D02C02C47800E0C215 /* GyagData.swift */; };
 		708CD3D42C02C48800E0C215 /* GyagDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708CD3D22C02C48800E0C215 /* GyagDataManager.swift */; };
 		708CD3D52C02C48800E0C215 /* GyagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708CD3D32C02C48800E0C215 /* GyagModel.swift */; };
@@ -29,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		70087C512C15A0BD0059DCC2 /* railModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = railModel.swift; sourceTree = "<group>"; };
+		70087C552C1DCDCA0059DCC2 /* APIsevicei.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIsevicei.swift; sourceTree = "<group>"; };
 		708CD3D02C02C47800E0C215 /* GyagData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GyagData.swift; sourceTree = "<group>"; };
 		708CD3D22C02C48800E0C215 /* GyagDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GyagDataManager.swift; sourceTree = "<group>"; };
 		708CD3D32C02C48800E0C215 /* GyagModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GyagModel.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				7D6425972451AEA500F1DD90 /* WeatherData.swift */,
 				7DB97A2B24585AB800C3BB03 /* WeatherModel.swift */,
 				70087C512C15A0BD0059DCC2 /* railModel.swift */,
+				70087C552C1DCDCA0059DCC2 /* APIsevicei.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -203,6 +206,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				70087C522C15A0BD0059DCC2 /* railModel.swift in Sources */,
+				70087C562C1DCDCA0059DCC2 /* APIsevicei.swift in Sources */,
 				7D64259624473AE800F1DD90 /* WeatherDataManager.swift in Sources */,
 				7D6425982451AEA500F1DD90 /* WeatherData.swift in Sources */,
 				ADAA27B5231BBFAF00365194 /* WeatherViewController.swift in Sources */,
